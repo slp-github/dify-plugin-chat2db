@@ -1,0 +1,9 @@
+dify_plugin==0.0.1b68
+langchain_core==0.3.40
+sqlalchemy==2.0.38
+pymysql==1.1.0
+dashscope==1.22.1
+pyjwt==2.10.1
+cryptography==44.0.2
+sqlparse==0.5.3
+loguru==0.7.3

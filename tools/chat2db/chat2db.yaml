@@ -1,0 +1,106 @@
+identity:
+  name: Chat2DB
+  author: slp
+  label:
+    en_US: Chat to DB
+    zh_Hans: Chat to DB
+    pt_BR: Chat to DB
+description:
+  human:
+    en_US: This tool allows users to query the information in the database through natural language and obtain responses.
+    zh_Hans: 本工具允许用户通过自然语言查询数据库中的信息，并获取回复。
+    pt_BR: Esta ferramenta permite aos usuários consultar as informações no banco de dados por meio de linguagem natural e obter respostas.
+  llm: This tool allows users to query the information in the database through natural language and obtain responses.
+parameters:
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Query string
+      zh_Hans: 查询语句
+      pt_BR: Query string
+    human_description:
+      en_US: Please enter the question.
+      zh_Hans: 请输入问题。
+      pt_BR: Please enter the question.
+    llm_description: Please enter the question.
+    form: llm
+  - name: model
+    type: model-selector
+    scope: llm
+    required: true
+    label:
+      en_US: Model
+      zh_Hans: 使用的模型
+      pt_BR: Model
+    human_description:
+      en_US: Model
+      zh_Hans: 使用的模型
+      pt_BR: Model
+    llm_description: which Model to invoke
+    form: form
+  - name: db_host
+    type: string
+    required: true
+    label:
+      en_US: database host
+      zh_Hans: 数据库主机
+      pt_BR: database host
+    human_description:
+      en_US: Please enter the database host.
+      zh_Hans: 请输入数据库主机。
+      pt_BR: Please enter the database host.
+    llm_description: This project aims to develop an intelligent Text-to-SQL conversion tool that leverages natural language processing technology, enabling users to quickly and accurately retrieve required information from relational databases through intuitive text queries. This significantly lowers the barrier to database querying, enhancing the efficiency and convenience of data access. 
+    form: form
+  - name: db_port
+    type: string
+    required: true
+    label:
+      en_US: database port
+      zh_Hans: 数据库端口
+      pt_BR: database port
+    human_description:
+      en_US: Please enter the database port.
+      zh_Hans: 请输入数据库端口。
+      pt_BR: Please enter the database port.
+    llm_description: This project aims to develop an intelligent Text-to-SQL conversion tool that leverages natural language processing technology, enabling users to quickly and accurately retrieve required information from relational databases through intuitive text queries. This significantly lowers the barrier to database querying, enhancing the efficiency and convenience of data access.
+    form: form
+  - name: db_user
+    type: string
+    required: true
+    label:
+      en_US: database user
+      zh_Hans: 数据库用户
+      pt_BR: database user
+    human_description:
+      en_US: Please enter the database user.
+      zh_Hans: 请输入数据库用户。
+      pt_BR: Please enter the database user.
+    form: form
+  - name: db_passwd
+    type: secret-input
+    required: true
+    label:
+      en_US: database password
+      zh_Hans: 数据库密码
+      pt_BR: database password
+    human_description:
+      en_US: Please enter the database password.
+      zh_Hans: 请输入数据库密码。
+      pt_BR: Please enter the database password.
+    form: form
+  - name: db_name
+    type: string
+    required: true
+    label:
+      en_US: database name
+      zh_Hans: 数据库名称
+      pt_BR: database name
+    human_description:
+      en_US: Please enter the database name.
+      zh_Hans: 请输入数据库名称。
+      pt_BR: Please enter the database name.
+    form: form
+extra:
+  python:
+    source: tools/chat2db/chat2db.py

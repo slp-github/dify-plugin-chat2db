@@ -1,0 +1,43 @@
+version: 0.0.3
+type: plugin
+author: slp
+name: chat2db
+label:
+  en_US: chat2db
+  ja_JP: chat2db
+  zh_Hans: chat2db
+  pt_BR: chat2db
+description:
+  en_US: 'This project aims to develop an intelligent Chat-to-DB conversion tool that leverages natural language processing technology, enabling users to quickly and accurately retrieve required information from relational databases through intuitive text queries. This significantly lowers the barrier to database querying, enhancing the efficiency and convenience of data access. '
+  ja_JP: 'このプロジェクトは、自然言語処理技術を活用したインテリジェントなテキストからSQLへの変換ツールを開発することを目的としています。これにより、ユーザーは直感的なテキストクエリを通じてリレーショナルデータベースから必要な情報を迅速かつ正確に取得することができます。これにより、データベースクエリの障壁が大幅に低下し、データアクセスの効率と利便性が向上します。'
+  zh_Hans: '本项目致力于开发一种智能Chat-to-DB转换工具，通过自然语言处理技术，使用户能够以直观的文本查询方式，快速、准确地从关系数据库中检索所需信息，极大降低了数据库查询的门槛，提升了数据访问的效率和便捷性。'
+  pt_BR: 'Este projeto tem como objetivo desenvolver uma ferramenta inteligente de conversão de texto para SQL que aproveita a tecnologia de processamento de linguagem natural, permitindo que os usuários recuperem rapidamente e com precisão as informações necessárias de bancos de dados relacionais por meio de consultas de texto intuitivas. Isso reduz significativamente a barreira para a consulta de bancos de dados, aumentando a eficiência e a conveniência do acesso aos dados.'
+icon: icon.svg
+resource:
+  memory: 268435456
+  permission:
+    tool:
+      enabled: true
+    model:
+      enabled: true
+      llm: true
+      text_embedding: false
+      rerank: false
+      tts: false
+      speech2text: false
+      moderation: false
+plugins:
+  tools:
+    - provider/chat2db.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+created_at: 2025-03-11T09:40:31.759794+08:00
+privacy: PRIVACY.md
+verified: false

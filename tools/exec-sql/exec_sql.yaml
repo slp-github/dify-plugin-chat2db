@@ -1,0 +1,90 @@
+identity:
+  name: SQLExecutor
+  author: slp
+  label:
+    en_US: Execute SQL
+    zh_Hans: Execute SQL
+    pt_BR: Executar SQL
+description:
+  human:
+    en_US: This tool provides the ability to execute SQL.
+    zh_Hans: 本工具提供了执行SQL的能力
+    pt_BR: Esta ferramenta fornece a capacidade de executar SQL.
+  llm: This tool provides the ability to execute SQL.
+parameters:
+  - name: sql_query
+    type: string
+    required: true
+    label:
+      en_US: Query SQL string
+      zh_Hans: 查询SQL语句
+      pt_BR: Query SQL string
+    human_description:
+      en_US: Execute SQL
+      zh_Hans: 执行SQL
+      pt_BR: Executar SQL
+    llm_description: Execute SQL
+    form: llm
+  - name: db_host
+    type: string
+    required: true
+    label:
+      en_US: database host
+      zh_Hans: 数据库主机
+      pt_BR: database host
+    human_description:
+      en_US: Please enter the database host.
+      zh_Hans: 请输入数据库主机。
+      pt_BR: Please enter the database host.
+    form: form
+  - name: db_port
+    type: string
+    required: true
+    label:
+      en_US: database port
+      zh_Hans: 数据库端口
+      pt_BR: database port
+    human_description:
+      en_US: Please enter the database port.
+      zh_Hans: 请输入数据库端口。
+      pt_BR: Please enter the database port.
+    form: form
+  - name: db_user
+    type: string
+    required: true
+    label:
+      en_US: database user
+      zh_Hans: 数据库用户
+      pt_BR: database user
+    human_description:
+      en_US: Please enter the database user.
+      zh_Hans: 请输入数据库用户。
+      pt_BR: Please enter the database user.
+    form: form
+  - name: db_passwd
+    type: secret-input
+    required: true
+    label:
+      en_US: database password
+      zh_Hans: 数据库密码
+      pt_BR: database password
+    human_description:
+      en_US: Please enter the database password.
+      zh_Hans: 请输入数据库密码。
+      pt_BR: Please enter the database password.
+    form: form
+  - name: db_name
+    type: string
+    required: true
+    label:
+      en_US: database name
+      zh_Hans: 数据库名称
+      pt_BR: database name
+    human_description:
+      en_US: Please enter the database name.
+      zh_Hans: 请输入数据库名称。
+      pt_BR: Please enter the database name.
+    form: form
+extra:
+  python:
+    source: tools/exec-sql/exec_sql.py

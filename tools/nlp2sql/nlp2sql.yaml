@@ -1,0 +1,117 @@
+identity:
+  name: NLP2SQL
+  author: slp
+  label:
+    en_US: NLP to SQL
+    zh_Hans: NLP to SQL
+    pt_BR: NLP to SQL
+description:
+  human:
+    en_US: This tool provides the ability to convert natural language into SQL.
+    zh_Hans: 本工具提供了自然语言转换成SQL的能力
+    pt_BR: Esta ferramenta fornece a capacidade de converter linguagem natural em SQL.
+  llm: This tool provides the ability to convert natural language into SQL.
+parameters:
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Query string
+      zh_Hans: 查询语句
+      pt_BR: Query string
+    human_description:
+      en_US: Please enter the question.
+      zh_Hans: 请输入问题。
+      pt_BR: Please enter the question.
+    llm_description: Please enter the question.
+    form: llm
+  - name: model
+    type: model-selector
+    scope: llm
+    required: true
+    label:
+      en_US: Model
+      zh_Hans: 使用的模型
+      pt_BR: Model
+    human_description:
+      en_US: Model
+      zh_Hans: 使用的模型
+      pt_BR: Model
+    llm_description: which Model to invoke
+    form: form
+  - name: generate_sql_prompt
+    type: string
+    required: false
+    label:
+      en_US: generate sql prompt
+      zh_Hans: 大模型生成sql的提示词
+      pt_BR: generate sql prompt
+    human_description:
+      en_US: Please enter the prompt words for the large model to generate SQL.
+      zh_Hans: 请输入大模型生成sql的提示词。
+      pt_BR: Please enter the prompt words for the large model to generate SQL.
+    llm_description: Prompt words for large models to generate SQL.
+    form: form
+  - name: db_host
+    type: string
+    required: true
+    label:
+      en_US: database host
+      zh_Hans: 数据库主机
+      pt_BR: database host
+    human_description:
+      en_US: Please enter the database host.
+      zh_Hans: 请输入数据库主机。
+      pt_BR: Please enter the database host.
+    form: form
+  - name: db_port
+    type: string
+    required: true
+    label:
+      en_US: database port
+      zh_Hans: 数据库端口
+      pt_BR: database port
+    human_description:
+      en_US: Please enter the database port.
+      zh_Hans: 请输入数据库端口。
+      pt_BR: Please enter the database port.
+    form: form
+  - name: db_user
+    type: string
+    required: true
+    label:
+      en_US: database user
+      zh_Hans: 数据库用户
+      pt_BR: database user
+    human_description:
+      en_US: Please enter the database user.
+      zh_Hans: 请输入数据库用户。
+      pt_BR: Please enter the database user.
+    form: form
+  - name: db_passwd
+    type: secret-input
+    required: true
+    label:
+      en_US: database password
+      zh_Hans: 数据库密码
+      pt_BR: database password
+    human_description:
+      en_US: Please enter the database password.
+      zh_Hans: 请输入数据库密码。
+      pt_BR: Please enter the database password.
+    form: form
+  - name: db_name
+    type: string
+    required: true
+    label:
+      en_US: database name
+      zh_Hans: 数据库名称
+      pt_BR: database name
+    human_description:
+      en_US: Please enter the database name.
+      zh_Hans: 请输入数据库名称。
+      pt_BR: Please enter the database name.
+    form: form
+extra:
+  python:
+    source: tools/nlp2sql/nlp2sql.py

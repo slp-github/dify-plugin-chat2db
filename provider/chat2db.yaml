@@ -1,0 +1,19 @@
+identity:
+  author: slp
+  name: chat2db
+  label:
+    en_US: chat2db
+    zh_Hans: chat2db
+    pt_BR: chat2db
+  description:
+    en_US: This plugin is specifically designed for natural language querying of databases. It enables users to directly input queries in natural language, making it effortless to search within the database. This provides a convenient and efficient means of data access, breaking through the complexities of traditional database querying.
+    zh_Hans: 此插件专门用于对数据库进行自然语言查询。它使用户能够直接输入自然语言，轻松地在数据库中进行搜索，提供了一种便捷高效的数据访问方式，打破了传统数据库查询的复杂性。
+    pt_BR: Este plugin é especialmente destinado a fazer consultas em linguagem natural ao banco de dados. Ele permite aos usuários inserir diretamente linguagem natural e pesquisar com facilidade no banco de dados, fornecendo uma forma conveniente e eficiente de acesso a dados e quebrando a complexidade das consultas tradicionais de banco de dados.
+  icon: icon.svg
+tools:
+  - tools/nlp2sql/nlp2sql.yaml
+  - tools/exec-sql/exec_sql.yaml
+  - tools/chat2db/chat2db.yaml
+extra:
+  python:
+    source: provider/chat2db.py
