@@ -16,10 +16,11 @@ Only return the SQL query without any explanations, comments, or natural languag
 Restrict the query to at most {top_k} results using the LIMIT clause, unless the user explicitly specifies a different limit.
 Never use SELECT *. Only query the necessary columns required to answer the question. Wrap each column name in backticks (`) to denote them as delimited identifiers.
 Only use columns from the tables provided below. Do not reference columns or tables that do not exist. If the query involves "today", use the CURDATE() function to retrieve the current date.
+"""  # noqa: E501
 
+CUSTOM_PROMPT_SQLQUERY_SUFFIX = """
 Use the following format:
 
 Question: <Question here>
 SQLQuery: <SQL Query to run, no need to carry any format>
-
-"""  # noqa: E501
+"""

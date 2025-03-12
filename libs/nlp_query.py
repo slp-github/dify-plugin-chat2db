@@ -11,7 +11,11 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine
 from sqlalchemy.exc import SQLAlchemyError
 
-from libs.prompts import CUSTOM_PROMPT, CUSTOM_PROMPT_SQLQUERY
+from libs.prompts import (
+    CUSTOM_PROMPT,
+    CUSTOM_PROMPT_SQLQUERY,
+    CUSTOM_PROMPT_SQLQUERY_SUFFIX,
+)
 
 # from langchain_community.utilities import SQLDatabase
 from libs.sql_database import SQLDatabase
@@ -103,7 +107,7 @@ class NLPQueryProcessor:
         if not parsed:
             return False
         print(parsed[0].get_type())
-        return parsed[0].get_type() == 'SELECT'
+        return parsed[0].get_type() == "SELECT"
 
     def generate_sql(
         self,
@@ -114,7 +118,8 @@ class NLPQueryProcessor:
     ) -> str:
         """生成SQL查询语句"""
         context = f"表结构信息:\n{table_info}\n\n问题: {query}"
-        response = self._invoke_model(sql_query_prompt, context, model_config)
+        query_prompt = sql_query_prompt + CUSTOM_PROMPT_SQLQUERY_SUFFIX
+        response = self._invoke_model(query_prompt, context, model_config)
         logger.info(f"Generate SQL LLM Response: {response.message.content}")
         sql_match = response.message.content.lower().split("sqlquery:")
         if len(sql_match) < 2:
