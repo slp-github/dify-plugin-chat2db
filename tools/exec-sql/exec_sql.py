@@ -1,3 +1,4 @@
+import json
 from collections.abc import Generator
 from typing import Any
 
@@ -15,8 +16,13 @@ class ExecSQLTool(Tool):
         """处理工具调用"""
         try:
             res = self._process_query(tool_parameters)
-            yield self.create_text_message(text=res.get("results", str(res)))
-            yield self.create_json_message(data=res)
+            result = (
+                json.dumps(res["result"], ensure_ascii=False)
+                if res.get("result")
+                else json.dumps(res, ensure_ascii=False)
+            )
+            yield self.create_text_message(text=result)
+            # yield self.create_json_message(data=res)
         except (ConfigurationError, DatabaseError) as e:
             yield self.create_text_message(text=str(e))
         except Exception as e:
