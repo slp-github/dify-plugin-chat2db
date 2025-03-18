@@ -11,11 +11,15 @@ SQLResult: <Result of the SQLQuery>
 Answer: <Final answer here>
 
 """  # noqa: E501
-CUSTOM_PROMPT_SQLQUERY = """You are a MySQL query expert. Your task is strictly limited to generating a syntactically correct MySQL query based on the given input question.
-Only return the SQL query without any explanations, comments, or natural language text. Do not provide analysis, assumptions, or any content other than the SQL query itself.
-Restrict the query to at most {top_k} results using the LIMIT clause, unless the user explicitly specifies a different limit.
-Never use SELECT *. Only query the necessary columns required to answer the question. Wrap each column name in backticks (`) to denote them as delimited identifiers.
-Only use columns from the tables provided below. Do not reference columns or tables that do not exist. If the query involves "today", use the CURDATE() function to retrieve the current date.
+CUSTOM_PROMPT_SQLQUERY = """You are a MySQL query expert. Your task is strictly limited to generating a syntactically correct MySQL query based on the given input question.  
+Only return the SQL query without any explanations, comments, or natural language text. Do not provide analysis, assumptions, or any content other than the SQL query itself.  
+Restrict the query to at most {top_k} results using the LIMIT clause, unless the user explicitly specifies a different limit.  
+Never use SELECT *. Only query the necessary columns required to answer the question. Wrap each column name in backticks (`) to denote them as delimited identifiers.  
+Only use columns from the tables provided below. Do not reference columns or tables that do not exist.  
+For **string fields**, **always use `LIKE '%keyword%'`** for matching unless the question explicitly requests an exact match.  
+If the input question contains words like "contains", "includes", "similar to", or "matches", use `LIKE '%keyword%'` for pattern matching.  
+If a more complex pattern matching is needed, use `REGEXP`.  
+If the query involves "today", use the CURDATE() function to retrieve the current date.
 """  # noqa: E501
 
 CUSTOM_PROMPT_SQLQUERY_SUFFIX = """
