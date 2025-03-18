@@ -1,5 +1,7 @@
 import json
 from collections.abc import Generator
+from datetime import date
+from decimal import Decimal
 from typing import Any
 
 from dify_plugin import Tool
@@ -24,8 +26,10 @@ class ExecSQLTool(Tool):
             yield self.create_text_message(text=result)
             # yield self.create_json_message(data=res)
         except (ConfigurationError, DatabaseError) as e:
+            logger.error(e)
             yield self.create_text_message(text=str(e))
         except Exception as e:
+            logger.error(f"系统错误: {str(e)}")
             yield self.create_text_message(text=f"系统错误: {str(e)}")
 
     def _process_query(self, tool_parameters: dict[str, Any]) -> dict:
@@ -46,6 +50,14 @@ class ExecSQLTool(Tool):
             # 执行SQL查询
             results = db_manager.execute_sql(engine, sql_query)
             logger.info(f"SQL查询结果: {results}")
+
+            # 将datetime.date对象转换为字符串
+            for result in results:
+                for key, value in result.items():
+                    if isinstance(value, date):
+                        result[key] = value.isoformat()
+                    elif isinstance(value, Decimal):
+                        result[key] = str(value)
 
             return {
                 "sql": sql_query,

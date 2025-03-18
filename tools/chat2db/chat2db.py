@@ -1,4 +1,6 @@
 from collections.abc import Generator
+from datetime import date
+from decimal import Decimal
 from typing import Any
 
 from dify_plugin import Tool
@@ -54,6 +56,13 @@ class Chat2DBTool(Tool):
             # 执行SQL查询
             results = db_manager.execute_sql(engine, sql_query)
             logger.info(f"SQL查询结果: {results}")
+            # 处理不可序列号的字段
+            for result in results:
+                for key, value in result.items():
+                    if isinstance(value, date):
+                        result[key] = value.isoformat()
+                    elif isinstance(value, Decimal):
+                        result[key] = str(value)
 
             # 生成自然语言回答
             answer = nlp_processor.generate_answer(
