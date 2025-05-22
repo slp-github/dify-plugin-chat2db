@@ -39,6 +39,19 @@ parameters:
       pt_BR: Model
     llm_description: which Model to invoke
     form: form
+  - name: generate_sql_prompt
+    type: string
+    required: false
+    label:
+      en_US: generate sql prompt
+      zh_Hans: 大模型生成sql的提示词
+      pt_BR: generate sql prompt
+    human_description:
+      en_US: Please enter the prompt words for the large model to generate SQL.
+      zh_Hans: 请输入大模型生成sql的提示词。
+      pt_BR: Please enter the prompt words for the large model to generate SQL.
+    llm_description: Prompt words for large models to generate SQL.
+    form: form
   - name: db_host
     type: string
     required: true
