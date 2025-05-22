@@ -44,13 +44,19 @@ class Chat2DBTool(Tool):
 
         query = tool_parameters.get("query")
         model_config = tool_parameters.get("model")
+        generate_sql_prompt = tool_parameters.get("generate_sql_prompt")
 
         with db_manager.get_engine() as engine:
             # 获取表结构信息
             table_info = db_manager.get_table_info(engine)
-
+            params = {
+                "table_info": table_info,
+                "query": query,
+                "model_config": model_config,
+            }
+            generate_sql_prompt and params.update({"sql_query_prompt": generate_sql_prompt})
             # 生成SQL查询
-            sql_query = nlp_processor.generate_sql(table_info, query, model_config)
+            sql_query = nlp_processor.generate_sql(**params)
             logger.info(f"SQL查询语句: {sql_query}")
 
             # 执行SQL查询
