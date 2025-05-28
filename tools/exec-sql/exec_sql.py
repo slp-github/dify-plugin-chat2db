@@ -18,13 +18,13 @@ class ExecSQLTool(Tool):
         """处理工具调用"""
         try:
             res = self._process_query(tool_parameters)
+            # yield self.create_json_message(data=res)
             result = (
                 json.dumps(res["result"], ensure_ascii=False)
                 if res.get("result")
-                else json.dumps(res, ensure_ascii=False)
+                else None
             )
             yield self.create_text_message(text=result)
-            # yield self.create_json_message(data=res)
         except (ConfigurationError, DatabaseError) as e:
             logger.error(e)
             yield self.create_text_message(text=str(e))
