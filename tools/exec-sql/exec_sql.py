@@ -22,7 +22,7 @@ class ExecSQLTool(Tool):
             result = (
                 json.dumps(res["result"], ensure_ascii=False)
                 if res.get("result")
-                else None
+                else "null"
             )
             yield self.create_text_message(text=result)
         except (ConfigurationError, DatabaseError) as e:
