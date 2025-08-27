@@ -106,8 +106,19 @@ class NLPQueryProcessor:
         parsed = sqlparse.parse(sql)
         if not parsed:
             return False
-        print(parsed[0].get_type())
         return parsed[0].get_type() == "SELECT"
+
+    @staticmethod
+    def clean_sql(sql: str) -> str:
+        """清理SQL语句多余内容"""
+        sql = (
+            sql.replace("sqlquery:", "")
+            .replace("```sql", "")
+            .replace("```", "")
+            .replace("\n", "")
+            .replace('"', "")
+        )
+        return sql.strip()
 
     def generate_sql(
         self,
@@ -121,12 +132,12 @@ class NLPQueryProcessor:
         query_prompt = sql_query_prompt + CUSTOM_PROMPT_SQLQUERY_SUFFIX
         response = self._invoke_model(query_prompt, context, model_config)
         logger.info(f"Generate SQL LLM Response: {response.message.content}")
-        sql_match = response.message.content.lower().split("sqlquery:")
-        if len(sql_match) < 2:
+        sql = self.clean_sql(response.message.content.lower())
+        logger.info(f"SQL:{sql}")
+        if not sql:
             raise DatabaseError("无法生成有效的SQL查询")
-        sql = sql_match[1].strip()
         if not self.is_select_query(sql):
-            raise DatabaseError("禁止生成非查询以外的SQL语句")
+            raise DatabaseError(f"禁止生成非查询以外的SQL语句：{sql}")
         return sql
 
     def generate_answer(
