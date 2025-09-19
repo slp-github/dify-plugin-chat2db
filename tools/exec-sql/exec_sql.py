@@ -1,6 +1,6 @@
 import json
 from collections.abc import Generator
-from datetime import date
+from datetime import date, timedelta
 from decimal import Decimal
 from typing import Any
 
@@ -18,6 +18,7 @@ class ExecSQLTool(Tool):
         """处理工具调用"""
         try:
             res = self._process_query(tool_parameters)
+            res = self._process_result(res)
             # yield self.create_json_message(data=res)
             result = (
                 json.dumps(res["result"], ensure_ascii=False)
@@ -31,6 +32,17 @@ class ExecSQLTool(Tool):
         except Exception as e:
             logger.error(f"系统错误: {str(e)}")
             yield self.create_text_message(text=f"系统错误: {str(e)}")
+
+    def _process_result(self, result: dict[str, Any]) -> dict:
+        """处理查询结果"""
+        if result.get("result"):
+            for item in result["result"]:
+                for key, value in item.items():
+                    if isinstance(value, timedelta):
+                        item[key] = str(value)
+                    elif isinstance(value, Decimal):
+                        item[key] = str(value)
+        return result
 
     def _process_query(self, tool_parameters: dict[str, Any]) -> dict:
         """处理自然语言查询"""
